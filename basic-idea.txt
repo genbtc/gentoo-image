@@ -1,0 +1,6 @@
+#!/bin/bash
+#Basic Steps.
+download-gentoo-iso-latest-dl_Spawns.sh  stage3-amd64-hardened-nomultilib-selinux-openrc
+amazing-make-partition-truncate.sh
+amazing-mount-fs-partitions.sh  gentooROOT-stage3-amd64-hardened-nomultilib-selinux-openrc-100123
+genr8-chroot  /mnt/gentooROOT-stage3-amd64-hardened-nomultilib-selinux-openrc-100123/

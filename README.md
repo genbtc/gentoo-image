@@ -1,4 +1,4 @@
-# The best gentoo document!
+# The best gentoo creation document!
 ##### by genr8eofl @gentoo IRC - 2023 LICENSE - Creative Commons 4.0, Attribution
 
 ## building stage3s, chroots, images, and immutables!
@@ -13,7 +13,7 @@
 5. extract stage3 into /mnt/stage3_1 (tar xvf * --...)
 	[extract-stage3-all.sh](extract-stage3-all.sh)
 5. genr8-chroot into /mnt/stage3_1 (arch-chroot for/from me/gentoo)
-	[genr8-chroot.sh](genr8-chroot)
+	[genr8-chroot.sh](genr8-chroot.sh)
    it binds /etc/resolv.conf, DISTDIR=/var/cache/distfiles, PORTDIR=/var/db/repos/gentoo
 6. Configure Further. Hostname, time, users, passwd etc.
 7. Exiting Chroot with Ctrl^D should cause unmount /mnt/stage3_1
@@ -22,7 +22,7 @@
 ### DD Image Contains an entire disk at this point, and could be booted. 
 
 
-### AMAZING PET GENTOO script:
+### amazing-pet-gentoo.sh (example) :
 ```
 STAGE3="${1:-stage3-amd64-hardened-nomultilib-selinux-openrc}"                                                                                        
 NUM=1                                                                                                                                                 
@@ -43,8 +43,16 @@ echo "    genr8-chroot /mnt/${STAGE3}_${NUM}"
 genr8-chroot /mnt/"${STAGE3}_${NUM}"                                                                                                                  
 echo "Unmounting. Loop device & Disk image remain."  
 ```
+
+
+### basic steps explanation [basic-idea.txt](basic-idea.txt)
+
 Downloads a gentoo stage3.
+
 Makes the disk & partition setup & formats the partitions.
+
 Mounts the partitions.
-Chroot in and set up.
-Loop Image . DD disk image remains for further processing
+
+Chroot in (you will want to set up your own emerge, kernel, bootloader, etc.)
+
+Loop Image remains, .dd is built, can be subjected to some further processing

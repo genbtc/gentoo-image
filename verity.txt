@@ -1,0 +1,91 @@
+<oldfashionedcow> The important bit to start off with is the partition scheme:
+<genr8eofl_> I thought the idea was just make it root only, generate a hash, and pass the hash
+<oldfashionedcow> yea thats it
+<oldfashionedcow> The important bit to start off with is the partition scheme:
+<oldfashionedcow> /efi - 512M - Gdisk code EF00
+<oldfashionedcow> (ESP)
+<genr8eofl_> ez
+<oldfashionedcow> /boot - 4G - Gdisk code EA00
+<oldfashionedcow> (XBOOTLDR)
+<genr8eofl_> we can handle /boot and /efi real easily
+<oldfashionedcow> :) ya
+<genr8eofl_> whats next
+<oldfashionedcow> /usr - ~50G (what I normally use) - Gdisk code 8314
+<oldfashionedcow> (Linux x86-64 /usr)
+<oldfashionedcow> Btw the gdisk codes is what lets that systemd unit automatically find and mount things, so i'm thinking that I can read them right in a shell script
+<oldfashionedcow> and then auto mount them
+<oldfashionedcow> and place that script in the initramfs
+<genr8eofl_> and is the systemd-auto-gpt-generator what normally picks up on those ?
+<oldfashionedcow> yea thats it
+<oldfashionedcow> No mountpoint - ~5G (10% of the size of /usr) - Gdisk code 8319
+<oldfashionedcow> (Linux x86-64 /usr verity)
+<oldfashionedcow> / - Rest of disk - Gdisk code 8304
+<oldfashionedcow> (Linux x86-64 root)
+<oldfashionedcow> so thats the first bit, the partition scheme
+<oldfashionedcow> so at that point in time, I just normally format things, so:
+<oldfashionedcow> mkfs.vfat -F32 /dev/nvme0n1p1 (the efi)
+<oldfashionedcow> mkfs.btrfs -L boot /dev/nvme0n1p1 (the boot)
+<oldfashionedcow> mkfs.btrfs -L boot /dev/nvme0n1p2* (the boot)
+<genr8eofl_> booting with btrfs ? mmk
+<oldfashionedcow> yea :)
+<genr8eofl_> idk why i would do that but ok
+<oldfashionedcow> so basically its cause the kernel is there
+<oldfashionedcow> the efi has to be vfat for the UEFI to see it
+<Spawns_Carpeting> you can put the kernel on the vfat part
+<oldfashionedcow> that has systemd boot and I put a driver for btrfs in it
+<oldfashionedcow> Spawns_Carpeting: yea anything you want
+<oldfashionedcow> I just normally use btrfs
+<oldfashionedcow> cryptsetup --type luks2 --hash sha512 --cipher aes-xts-plain64 --key-size 512 --pbkdf argon2id -i 3000 /dev/nvme0n1p3
+<genr8eofl_> what about actually placing the verity information down ? Thats what I actually want to know
+<oldfashionedcow> so then genr8eofl_ we ignore /dev/nvme0n1p4 for now
+<oldfashionedcow> cryptsetup --type luks2 --hash sha512 --cipher aes-xts-plain64 --key-size 512 --pbkdf argon2id -i 3000 /dev/nvme0n1p5
+<oldfashionedcow> (luks our root)
+<oldfashionedcow> then we mount the p3 at /usr and p5 at /, etc.
+<oldfashionedcow> then we just do a normal gentoo install
+<oldfashionedcow> after all of that is done I run this:
+<oldfashionedcow> veritysetup format /dev/mapper/cryptusr /dev/nvme0n1p4 | grep Root | cut -f2 > roothash.txt
+<oldfashionedcow> so this command sets up p4 as a verity partition
+<oldfashionedcow> and puts out hash in roothash.txt
+<genr8eofl_> got it
+<oldfashionedcow> so then I have this kernel cmdline:
+<oldfashionedcow> rd.luks.name=uuidhere=cryptroot rd.luks.name=uuidhere=cryptusr
+<oldfashionedcow> that unlocks the luks drives
+<oldfashionedcow> then I also add another imporant thing, root=/dev/mapper/cryptroot
+<oldfashionedcow> now for the verity stuff
+<oldfashionedcow> systemd.verity=1 roothash=$(cat roothash.txt) systemd.verity_root_data=/dev/mapper/cryptusr systemd.verity_root_hash=</dev/.nvme0n1p4's uuid> systemd.verity_root_options=panic-on-corruption
+<oldfashionedcow> so thats what does verity checking genr8eofl_ 
+<genr8eofl_> omg
+<oldfashionedcow> now there IS good news
+<genr8eofl_> i need some good news at this point
+<oldfashionedcow> genr8eofl_: i came up with an idea to do that without systemd
+<oldfashionedcow> i was looking at android
+<oldfashionedcow> and dracut
+<genr8eofl_> good cause we are gonna need it
+<oldfashionedcow> https://github.com/hatlocker/dracut-verity
+<Clov3r> [Website] GitHub - hatlocker/dracut-verity: Dracut module to mount DM-Verity volumes
+<oldfashionedcow> that gave a good example
+<genr8eofl_> nice
+<oldfashionedcow> and a few others
+<oldfashionedcow> another idea is to literally just use a shell script
+<oldfashionedcow> to use veritysetup to open it
+<oldfashionedcow> cause veritysetup is like cryptsetup
+<oldfashionedcow> you see how that works
+<oldfashionedcow> so i embed the roothash in the initramfs
+<oldfashionedcow> then it simply has a shell script that reads and checks it
+<oldfashionedcow> veritysetup will refuse to open the drive if its not matching the hash
+<genr8eofl_> https://github.com/hatlocker/dracut-verity/blob/master/10verity/verity-generator
+* oldfashionedcow looks
+<oldfashionedcow> yea that is how systemd does it
+<oldfashionedcow> i was looking at how dracut systemd does it
+<oldfashionedcow> and i'm thinking i can replace that
+<oldfashionedcow> with just a shell script
+<genr8eofl_> ok
+<genr8eofl_> works
+<oldfashionedcow>  ExecStart=/bin/sh -c '/sbin/veritysetup create usr --hash-offset="\$(e2size ${usr})" "${usr}" "${usr}" "${usrhash}"'
+<oldfashionedcow>  ExecStop=/sbin/veritysetup remove usr
+<oldfashionedcow> so wdy think?
+<oldfashionedcow> it seems feasible to me
+<genr8eofl_> sure
+<genr8eofl_> but the point of that was to get them out of /proc/cmdline
+<oldfashionedcow> the roothash?
+<genr8eofl_> yes

@@ -4,15 +4,8 @@
 # Thanks for doing all of the hard work! -@Kangie, 2022
 # subsequently modified by -@genr8eofl, 2023
 #  (ran shellcheck) (sorted code for readability) (comments)
-#  (unshare removed) (auto bind mount itself - old warning)
-#   modified Sept 28, 2023
-#TODO: FIX: fix warning messages:
-#mount: /mnt/stage3/usr/src/linux: mount point is not a directory.
-#       dmesg(1) may have more information after failed mount system call.
-#DONE: TODO: needs fix:
-#mount: /mnt/crucialp1/gentoo-livegui-amd64-20230604T170201Z/usr/src/linux: mount point is not a directory.
-#-rw-r--r--.  1 root root root:object_r:mnt_t    0 Jul  4 02:24 linux
-#livegui comes with empty dir, causing a blank 0 file to be created and this warning. Fix somehow ?
+#  (unshare removed) (auto bind mount itself - fix warning)
+#   modified Sept 28, 2023 & 2024
 #
 # Options:
 #   -d | --debug
@@ -24,11 +17,6 @@
 #   -r | --bind-hostrepos | MOUNT_HOSTREPOS (main gentoo repo bound regardless)
 #   -u | --user | USERSPEC=user[:group]
 #
-#Note, the target chroot directory *SHOULD* be a mountpoint.
-#-This ensures that tools such as findmnt(8) have an accurate hierarchy of
-# the mounted filesystems within the chroot.
-#-Note, code changed, now this happens automatically
-#-Diagnostic Messages updated accordingly
 
 usage() {
   cat <<EOF
@@ -177,7 +165,6 @@ file_makeconf="/etc/portage/make.conf"
 file_reposconf="/etc/portage/repos.conf"
 file_resolvconf="/etc/resolv.conf"
 gentoo_bashrc="/tmp/gentoo-bashrc"
-root_bashaliases="/root/.bash_aliases"
 
 # main - the core program
 gentoo-chroot() {
@@ -219,11 +206,9 @@ gentoo-chroot() {
 #!/usr/bin/env bash
 source /etc/profile && env-update
 export PS1="(chroot) \$PS1"
-source $root_bashaliases #genr8 personal alias file
 EOF
 	fi				#^ backslash to escape the $ so it doesnt expand the variable
     CHROOT_FILES+=( "${gentoo_bashrc}:/root/.bashrc" ) # map .bashrc to /root, inside the chroot
-    CHROOT_FILES+=( "${root_bashaliases}:/root/.bash_aliases" ) # genr8 keeps his aliases in here :)
   fi
 
   # Kernel Source dir, '-k', /usr/src/linux, Kernels can be shared (caveat: may need make clean) [DEFAULT]

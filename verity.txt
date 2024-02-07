@@ -1,3 +1,6 @@
+# Talks about the partition scheme, partition table, EFI GPT codes for XBOOTLDR, Mountpoints, Gdisk codes, Filesystems to use
+# Then the cryptsetup, veritysetup, luks encrypted commands
+# Then the boot command lines for the bootloader/kernel parameters/initramfs (EFI->systemd-boot->dracut->systemd)
 <oldfashionedcow> The important bit to start off with is the partition scheme:
 <genr8eofl_> I thought the idea was just make it root only, generate a hash, and pass the hash
 <oldfashionedcow> yea thats it

@@ -15,7 +15,7 @@ selected=$(dialog \
     "S" "Download Latest $STAGE-.tar.gz" \
     "D" "Make Virtual Disk image" \
     "F" "Mount filesystem partitions" \
-    "C" "Chroot in (genr8-chroot)" \
+    "C" "Chroot in (genr8-chroot.sh)" \
 2>&1 1>&3)
 #Fancy FD redirection stores selection in FD3
 exit_status=$?  #numerical return code

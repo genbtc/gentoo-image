@@ -73,5 +73,5 @@ else
     echo ".extractedtar file found - skipping extraction of .tar.xz"
 fi
 
-echo "Done! now Run: genr8-chroot ${TARGET}"
+echo "Done! now Run: genr8-chroot.sh ${TARGET}"
 cd "${TARGET}" || exit 1

@@ -41,5 +41,5 @@ mount "${DEVLOOP}" "${TARGET}"
 echo "Mounted Root FS Partition on ${TARGET}"
 
 #Complete!
-echo "Done! now Run: genr8-chroot ${TARGET}"
+echo "Done! now Run: genr8-chroot.sh ${TARGET}"
 cd "${TARGET}" || exit 1

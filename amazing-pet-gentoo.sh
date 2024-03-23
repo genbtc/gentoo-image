@@ -16,6 +16,6 @@ echo
 echo "********************3****************************"
 echo
 echo "                 Go ! Chroot in:"
-echo "    genr8-chroot /mnt/${STAGE3}_${NUM}"
+echo "    genr8-chroot.sh /mnt/${STAGE3}_${NUM}"
 genr8-chroot.sh /mnt/"${STAGE3}_${NUM}"
 echo "Unmounting. Loop device & Disk image remain."

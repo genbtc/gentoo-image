@@ -33,11 +33,11 @@ Found existing EFI target dir: /mnt/stage3-amd64-hardened-nomultilib-selinux-ope
 Mounted EFI (partition 1) on /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1//boot/efi/
 Created directory structure hierarchy for: /dev,sys,proc,run,tmp
 .extractedtar file found - skipping extraction of .tar.xz
-Done! now Run: genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
+Done! now Run: genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
 
 ********************3****************************
                  Go ! Chroot in:
-    genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
+    genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
 ==> Binding /usr/src/linux now.
 >>> Regenerating /etc/ld.so.cache...
 (chroot) genr8too / #
@@ -149,12 +149,12 @@ cp: cannot stat '/mnt/crucialp1/project5-october-stage3script-test/stage3-amd64-
 Extracting stage3-amd64-hardened-nomultilib-selinux-openrc_1*.tar.xz with tar to root mount dir @ /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/ .............
 tar: /mnt/crucialp1/project5-october-stage3script-test/stage3-amd64-hardened-nomultilib-selinux-openrc_1*.tar.xz: Cannot open: No such file or directory
 tar: Error is not recoverable: exiting now
-Done! now Run: genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
+Done! now Run: genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
 
 ********************3****************************
 
                  Go ! Chroot in:
-    genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
+    genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
 ==> WARNING: Empty Blocker file found for ./usr/src/linux , Deleting.
 rm: cannot remove '/mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/usr/src/linux': No such file or directory
 ==> Creating blank dir for mountpoint! Binding now.
@@ -272,12 +272,12 @@ Mounted EFI (partition 1) on /mnt/stage3-amd64-hardened-nomultilib-selinux-openr
 Created directory structure hierarchy for: /dev,sys,proc,run,tmp
 Copying stage3-amd64-hardened-nomultilib-selinux-openrc-20231001T170148Z.tar.xz to root of image  @ /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
 Extracting stage3-amd64-hardened-nomultilib-selinux-openrc-20231001T170148Z.tar.xz with tar to root mount dir @ /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/ .............
-Done! now Run: genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
+Done! now Run: genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
 
 ********************3****************************
 
                  Go ! Chroot in:
-    genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
+    genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
 ==> WARNING: Empty Blocker file found for ./usr/src/linux , Deleting.
 rm: cannot remove '/mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/usr/src/linux': No such file or directory
 ==> Creating blank dir for mountpoint! Binding now.
@@ -323,12 +323,12 @@ Found existing EFI target dir: /mnt/stage3-amd64-hardened-nomultilib-selinux-ope
 Mounted EFI (partition 1) on /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1//boot/efi/
 Created directory structure hierarchy for: /dev,sys,proc,run,tmp
 .extractedtar file found - skipping extraction of .tar.xz
-Done! now Run: genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
+Done! now Run: genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
 
 ********************3****************************
 
                  Go ! Chroot in:
-    genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
+    genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
 ==> Binding /usr/src/linux now.
 >>> Regenerating /etc/ld.so.cache...
 (chroot) genr8too / #
@@ -370,11 +370,11 @@ Found existing EFI target dir: /mnt/stage3-amd64-hardened-nomultilib-selinux-ope
 Mounted EFI (partition 1) on /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1//boot/efi/
 Created directory structure hierarchy for: /dev,sys,proc,run,tmp
 .extractedtar file found - skipping extraction of .tar.xz
-Done! now Run: genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
+Done! now Run: genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1/
 
 ********************3****************************
                  Go ! Chroot in:
-    genr8-chroot /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
+    genr8-chroot.sh /mnt/stage3-amd64-hardened-nomultilib-selinux-openrc_1
 ==> Binding /usr/src/linux now.
 >>> Regenerating /etc/ld.so.cache...
 (chroot) genr8too / #

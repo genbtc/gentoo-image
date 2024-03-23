@@ -1,5 +1,5 @@
 #!/bin/bash
-# pet-gentoo.sh script v0.12 by @genr8eofl copyright 2023 - AGPL3 License
+# amazing-pet-gentoo.sh script v0.13 by @genr8eofl copyright 2023/2024 - AGPL3 License
 
 STAGE3="${1:-stage3-amd64-hardened-nomultilib-selinux-openrc}"
 NUM=1
@@ -17,5 +17,5 @@ echo "********************3****************************"
 echo
 echo "                 Go ! Chroot in:"
 echo "    genr8-chroot /mnt/${STAGE3}_${NUM}"
-genr8-chroot /mnt/"${STAGE3}_${NUM}"
+genr8-chroot.sh /mnt/"${STAGE3}_${NUM}"
 echo "Unmounting. Loop device & Disk image remain."

@@ -10,7 +10,7 @@ DIRNAME="${2:-gentoo}"
 
 #start with a single disk/image file that has an entire disk inside it
 if [ ! -e "${DISKIMG}" ]; then
-    echo "Cannot find ${DISKIMG} file" > /dev/stderr && exit 9
+    echo "Cannot find ${DISKIMG} file" >&2 && exit 9
 fi
 
 #3-Create new mount point /mnt/___ for root fs / , 3

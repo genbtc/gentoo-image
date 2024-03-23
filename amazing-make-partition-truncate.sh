@@ -9,7 +9,7 @@ DISKSIZE="25G"  #enough
 
 #Existing?
 if [ -e "${DISKIMG}" ]; then
-    echo "Error! Disk Image found, it had already been created!" > /dev/stderr
+    echo "Error! Disk Image found, it had already been created!" >&2
     echo "To mount the root filesystem, Run:"
     echo "  amazing-mount-fs-partitions.sh ${DISKIMG}" && exit
 else
@@ -25,7 +25,7 @@ chcon -t tmpfs_t "${DISKIMG}"
 
 SANITYCHECK=$(losetup)
 if [ -e "${SANITYCHECK}" ]; then
-    echo "Error. Loop device already exists! Why!? Exiting..." > /dev/stderr && exit
+    echo "Error. Loop device already exists! Why!? Exiting..." >&2 && exit
 else
     echo "This will detach all previous loop devices..."
     losetup --detach-all
@@ -36,7 +36,7 @@ fi
 #DEVLOOP="/dev/loop0"
 DEVLOOP=$(losetup --find --show --partscan "${DISKIMG}")
 if [ ! -e "${DEVLOOP}" ]; then
-    echo "Error. Failed to set up Loop Device or Loop Device not found. Exiting!" > /dev/stderr && exit
+    echo "Error. Failed to set up Loop Device or Loop Device not found. Exiting!" >&2 && exit
 #GOTO: END
 else
     echo "Found loop device: ${DEVLOOP} !"

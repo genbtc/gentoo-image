@@ -8,13 +8,13 @@ STAGINGDIR="${PWD:-/mnt/crucialp1/}"
 DISKIMG="${1:-gentooROOT-stage3-amd64-hardened-nomultilib-selinux-openrc-1.dd}"
 #start with a single file that has an entire disk inside it
 if [ ! -e "${DISKIMG}" ]; then
-    echo "Cannot find ${DISKIMG} file" > /dev/stderr && exit 9
+    echo "Cannot find ${DISKIMG} file" >&2 && exit 9
 fi
 
 #Load .dd into loop device
 DEVLOOP=$(losetup --find --show --partscan "${DISKIMG}")
 if [ ! -e "${DEVLOOP}" ]; then
-    echo "Error. Failed to set up Loop Device or Loop Device not found. Exiting!" > /dev/stderr && exit 6
+    echo "Error. Failed to set up Loop Device or Loop Device not found. Exiting!" >&2 && exit 6
 else
     echo "Found loop device: ${DEVLOOP} !"
 fi

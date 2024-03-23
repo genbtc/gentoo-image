@@ -3,13 +3,14 @@
 
 ## Gentoo Image Scripts - start-dialog.sh 
 
-![LatestScreenshot](start-dialog.png)
+![LatestScreenshot](start-dialog.png)v1 = start-dialog.sh
+![PetGentooVersion](amazing-pet-gentoo-dialog.png)v2 = amazing-pet-gentoo-dialog.sh
 
 (relies on "dialog" CLI program to make user friendly menu of image creation)
 
-## building stage3s, chroots, images, and immutables!
+### building stage3s, chroots, disk images, and more! in depth
 
-### Stage3:
+#### Stage3:
 1. Start with a suitable __Stage3__ download, or make your own
 2. __make amazing partition image__ create partitions & fs (truncate sparse, losetup, sfdisk, mkfs)
 	[amazing-make-partition-truncate.sh](amazing-make-partition-truncate.sh)
@@ -17,11 +18,12 @@
 	[amazing-mount-fs-partitions.sh](amazing-mount-fs-partitions.sh)
 4. __extract Stage3__ into /mnt/stage3_1 (tar xvf * --...)
 	[extract-stage3-all.sh](extract-stage3-all.sh)
-5. use my genr8-chroot.sh script to __chroot into__ target /mnt/stage3_1 (equiv of arch-chroot by me, genr8)
-	[genr8-chroot.sh](genr8-chroot.sh)
-   it binds /etc/resolv.conf, DISTDIR=/var/cache/distfiles, PORTDIR=/var/db/repos/gentoo
-6. Configure Further. Hostname, timezone, locale, users, passwd etc.
-7. Exiting genr8-chroot.sh with Ctrl^D should cause auto-unmount of target /mnt/stage3_1
+5. use my genr8-chroot.sh script to __chroot into__ target /mnt/stage3_1
+	[genr8-chroot.sh](genr8-chroot.sh)  (equiv of arch-chroot by me, genr8)
+
+   (it binds /etc/resolv.conf, DISTDIR=/var/cache/distfiles, PORTDIR=/var/db/repos/gentoo)
+6. __Configure__ Further. Hostname, timezone, locale, users, passwd etc.
+7. Exiting genr8-chroot.sh with Ctrl^D should cause __auto-unmount__ of target /mnt/stage3_1
 8. losetup -D to unmount .dd loop image. __Saved .dd Image__ is Finished!
 ###### DD Image Contains an entire gentoo disk at this point, and what you do with it is up to your creativity! Some ideas, boot it as a VM, make it read only and immutable, use it as a backup recovery partition, make multiple of them for many different software variants contained per image file. VM+Containerlike but manual.
 
